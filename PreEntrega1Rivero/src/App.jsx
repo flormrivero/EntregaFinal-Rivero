@@ -1,18 +1,23 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-dom'
 import NavBar from './components/NavBar/NavBar'
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
+import ItemCount from './components/ItemCount/ItemCount'
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-      <div>
+      <BrowserRouter>
         <NavBar />
-        <ItemListContainer greeting={'¡Bienvenidas/os!'}/>
-      </div>
+        <Routes>
+          <Route path='/' element={<ItemListContainer />}/>
+          <Route path='/category/:categoryId' element={<ItemListContainer />}/>
+          <Route path='/item/:itemId' element={<ItemDetailContainer />}/>
+          <Route path='#' element={<h1>404 NOT FOUND</h1>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
