@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import ItemCount from '../ItemCount/ItemCount'
-import {link} from 'react-dom'
+import {Link} from 'react-dom'
 
 const ItemDetail = ({id, name, img, price, stock}) => {
     const [quantityAdded, setQuantityAdded] = useState(0)

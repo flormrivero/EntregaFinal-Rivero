@@ -10,11 +10,11 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         getProductById(itemId)
-        .then(response => {
-            setProduct(response)
+            .then(response => {
+                setProduct(response)
         })
-        .catch(error => {
-            console.log(error)
+            .catch(error => {
+                console.log(error)
         })
     }, [itemId])
 
