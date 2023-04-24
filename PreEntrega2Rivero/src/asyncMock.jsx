@@ -16,7 +16,7 @@ img: 'https://i.pinimg.com/564x/62/4d/b7/624db76a3fc88ec8755fad6921bf9387.jpg',
 stock: 25,
 description: 'Sabor Cacao'},
 
-{id: '2',
+{id: '3',
 name: 'Desayuno Saludable',
 price: 2000,
 category: 'desayunos',
