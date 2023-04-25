@@ -1,4 +1,4 @@
-const Item = ({id, name, img, price, stock}) => {
+const Item = ({id, name, img, price, stock, description}) => {
     return (
         <article className="CardItem">
             <header className="Header">
@@ -15,6 +15,9 @@ const Item = ({id, name, img, price, stock}) => {
                 </p>
                 <p className="Info">
                     Stock disponible: {stock}
+                </p>
+                <p className="Info">
+                    Descripción: {description}
                 </p>
             </section>
             <footer className="ItemFooter">

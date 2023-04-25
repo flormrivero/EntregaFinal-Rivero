@@ -2,7 +2,7 @@ import {useState} from 'react'
 import ItemCount from '../ItemCount/ItemCount'
 import {Link} from 'react-router-dom'
 
-const ItemDetail = ({id, name, img, price, stock}) => {
+const ItemDetail = ({id, name, img, price, stock, description}) => {
     const [quantityAdded] = useState(0)
 
     return (
@@ -21,6 +21,9 @@ const ItemDetail = ({id, name, img, price, stock}) => {
                 </p>
                 <p className="Info">
                     Stock disponible: {stock}
+                </p>
+                <p className="Info">
+                    Descripción: {description}
                 </p>
             </section>
             <footer className="ItemFooter">

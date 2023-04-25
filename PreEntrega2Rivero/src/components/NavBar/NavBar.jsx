@@ -13,8 +13,8 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to={`/category/barritas`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>Barritas de Cereal</NavLink>
-            <NavLink to={`/category/desayunos`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>Desayunos Saludables</NavLink>
+            <NavLink to={`/category/barritas`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>Barritas de Cereal  </NavLink>
+            <NavLink to={`/category/desayunos`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>  Desayunos Saludables</NavLink>
           </Nav>
           <Nav>
             <CartWidget />
