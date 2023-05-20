@@ -1,30 +1,49 @@
 import {useState, useEffect} from 'react'
-import { getProducts, getProductsByCategory} from '../../asyncMock'
-import ItemList from '../ItemList/ItemList'
 
 import {useParams} from 'react-router-dom'
 
-const ItemListContainer = ({greeting}) => {
-    const [products, setProducts] = useState([])
+import { getDocs, collection, query, where, getFirestore } from 'firebase/firestore'
+import ItemList from '../ItemList/ItemList'
+import { Loading } from "../Loading/Loading"
 
-    const {categoryId } = useParams()
+const ItemListContainer = ({ greeting }) => {
+    const [productos, setProductos] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    const {categoria} = useParams()
     
-    useEffect(() => {
-        const asyncFunc = categoryId ? getProductsByCategory : getProducts
+    useEffect(()=>{
+        const db     = getFirestore()
+        const queryCollection = collection(db, '39660')
 
-        asyncFunc(categoryId)
-            .then(response => {
-                setProducts(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [categoryId])
+        if (!categoria) {  
+            getDocs(queryCollection)
+                .then(res => setProductos(  res.docs.map(producto => ( { id: producto.id, ...producto.data() } )) ))
+                .catch( error => console.log(error) )
+                .finally(()=> setIsLoading(false))
+        }else{
+            const queryCollectionFiltered = query(
+                queryCollection, 
+                where('category','==', categoria),
+            
+            )
+    
+            getDocs(queryCollectionFiltered)
+                .then(res => setProductos(  res.docs.map(producto => ( { id: producto.id, ...producto.data() } )) ))
+                .catch( error => console.log(error) )
+                .finally(()=> setIsLoading(false))
+        }
+    }, [categoria])
+
     return (
-        <div>
-            <h2>{greeting}</h2>
-            <ItemList products={products} />
-        </div>
+        <>
+            {isLoading ? 
+                    <Loading />
+                :
+                    <ItemList productos={productos} />
+            }
+        </>
+        
     )
 }
 

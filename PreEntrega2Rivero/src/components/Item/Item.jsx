@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const Item = ({id, name, img, price, stock, description}) => {
     return (
         <article className="CardItem">

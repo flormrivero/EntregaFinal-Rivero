@@ -1,10 +1,30 @@
-import ItemDetail from "../ItemDetail/ItemDetail"
+import { memo } from "react"
+import Item from "../Item/Item"
 
-const ItemList = ({products }) => {
-    return (
-        <div className='ListGroup'>
-            {products.map(prod => <ItemDetail key ={prod.id} {...prod} />)}
-        </div>
-    )
-}
+const ItemList = memo( ({productos}) => {
+
+        return (
+            <div style={{
+                display: "flex",
+                flexDirection: 'row',
+                flexWrap: "wrap"
+            }}>
+            
+                {productos.map( ({id, category, name, img, price, stock, description}) =>  (
+                    <Item 
+                        category={category}
+                        id={id}
+                        name={name} 
+                        img={img} 
+                        price={price}
+                        stock={stock}
+                        description={description}
+                    />
+                ))}
+                
+               
+            </div>
+        )
+    }
+) 
 export default ItemList
