@@ -10,13 +10,13 @@ const ItemListContainer = ({  }) => {
     const [productos, setProductos] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
-    const {category} = useParams()
+    const {categoryId} = useParams()
     
     useEffect(()=>{
         const db     = getFirestore()
         const queryCollection = collection(db, '39660')
 
-        if (!categoria) {  
+        if (!categoryId) {  
             getDocs(queryCollection)
                 .then(res => setProductos(  res.docs.map(producto => ( { id: producto.id, ...producto.data() } )) ))
                 .catch( error => console.log(error) )
@@ -24,7 +24,7 @@ const ItemListContainer = ({  }) => {
         }else{
             const queryCollectionFiltered = query(
                 queryCollection, 
-                where('category','==', category),
+                where('category','==', categoryId),
             
             )
     
@@ -33,7 +33,7 @@ const ItemListContainer = ({  }) => {
                 .catch( error => console.log(error) )
                 .finally(()=> setIsLoading(false))
         }
-    }, [category])
+    }, [categoryId])
 
     return (
         <>
