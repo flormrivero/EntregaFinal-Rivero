@@ -1,12 +1,12 @@
 import React from "react";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+//import { CartProvider } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import { CartItem } from '../CartItem/CartItem'
 
 
 const Cart = () => {
-    const { cart, clearCart, totalQuantity, total } = useContext(CartContext)
+    const { cart, clearCart, totalQuantity, total } = useContext()
 
     if (totalQuantity === 0) {
         return (

@@ -6,11 +6,11 @@ import { getDocs, collection, query, where, getFirestore } from 'firebase/firest
 import ItemList from '../ItemList/ItemList'
 import { Loading } from "../Loading/Loading"
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = ({  }) => {
     const [productos, setProductos] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
-    const {categoria} = useParams()
+    const {category} = useParams()
     
     useEffect(()=>{
         const db     = getFirestore()
@@ -24,7 +24,7 @@ const ItemListContainer = ({ greeting }) => {
         }else{
             const queryCollectionFiltered = query(
                 queryCollection, 
-                where('category','==', categoria),
+                where('category','==', category),
             
             )
     
@@ -33,7 +33,7 @@ const ItemListContainer = ({ greeting }) => {
                 .catch( error => console.log(error) )
                 .finally(()=> setIsLoading(false))
         }
-    }, [categoria])
+    }, [category])
 
     return (
         <>

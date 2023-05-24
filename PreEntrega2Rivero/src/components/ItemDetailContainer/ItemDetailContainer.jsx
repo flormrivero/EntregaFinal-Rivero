@@ -25,6 +25,7 @@ const ItemDetailContainer = () => {
             .catch(error => {
                 console.log(error)
         })
+        .finally(()=> setLoading(false))
     }, [itemId])
 
     return (
@@ -32,7 +33,7 @@ const ItemDetailContainer = () => {
         {loading ?
         <h2>Cargando...</h2>
         :
-        <ItemDetail product= {product} />
+        <ItemDetail {...product} />
         }
         </>
     )    
