@@ -5,12 +5,12 @@ const ItemList = ({products}) => {
     
     return (
         <div style={{
-            display: "flex",
+            display: "block",
             flexDirection: 'row',
             flexWrap: "wrap"
         }}>
            
-            {products.map( ({id ,img, name, price, category}) =>  (
+            {products.map( ({id ,img, name, price, category, description, stock}) =>  (
                 <Item 
                     key={id} 
                     id={id}
@@ -18,6 +18,8 @@ const ItemList = ({products}) => {
                     name={name} 
                     price={price}
                     categoria={category}
+                    description={description}
+                    stock={stock}
                 />
             ))}
             

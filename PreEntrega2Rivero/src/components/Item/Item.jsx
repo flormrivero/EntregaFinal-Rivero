@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom'
 
-const Item = ({id, name, img, price, stock, description}) => {
+const Item = ({id, name, foto, price, stock, description}) => {
     return (
         <article className="CardItem">
             <header className="Header">
@@ -10,7 +10,7 @@ const Item = ({id, name, img, price, stock, description}) => {
                 </h2>
             </header>
             <picture>
-                <img src={img} alt={name} className="ItemImg" />
+                <img src={foto} alt={name} className="ItemImg" />
             </picture>
             <section>
                 <p className="Info">
