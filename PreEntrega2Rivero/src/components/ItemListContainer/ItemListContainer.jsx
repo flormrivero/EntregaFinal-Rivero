@@ -6,7 +6,7 @@ import { getDocs, collection, query, where } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
 import { Loading } from "../Loading/Loading"
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = ({  }) => {
     const [products, setProducts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
-import { useCartContext } from '../Context/CartContext'
+import { CartContext } from '../Context/CartContext'
 //import {validateForm } from "../Validacion/formValidation";
 
 
@@ -11,17 +11,17 @@ const CartContainer = () =>{
         phone:"",
         email:"",
     }) 
-    const {cartList, vaciarCarrito, totalCarrito, borrarCantidad, cantidadTotal} = useCartContext()
+    const {cart, addItem, removeItem, clearCart } = CartContext()
 
     const generarOrden=(evt)=>{
         evt.preventDefault()
         const order = {}
         order.buyer=dataForm
-        order.items=cartList.map(({name, id, price})=>({id, name, price}))
+        order.items=cart.map(({name, id, price})=>({id, name, price}))
         order.total=totalCarrito()
 
         const db = getFirestore()
-        const ordersCollection=collection(db, "orders")
+        const ordersCollection=collection(db, "39660")
 
         addDoc(ordersCollection, order)
         .then(resp=>console.log(resp))
@@ -36,7 +36,7 @@ const CartContainer = () =>{
         })
         } 
     
-    if (cantidadTotal() === 0 ) {
+    if (totalQuantity() === 0 ) {
         return(
             <div>
                 <h1 >No hay productos en el carrito</h1>
@@ -46,19 +46,20 @@ const CartContainer = () =>{
     return(
         
         <div>
-            {cartList.map((prod)=>(
+            {cart.map((prod)=>(
                 <div>
                     <img src={prod.img} alt="imagen" key="cart-container"/>
-                    <label>Precio:{prod.price} - Cantidad:{prod.cantidad} </label>                           
-                    <button onClick={() => borrarCantidad(prod.id)} > X </button>  
+                    <label>Precio:{prod.price} - Cantidad:{prod.cantidad} </label>   
+                    <button onClick={() => addItem(prod.id)} > Agregar producto </button>                       
+                    <button onClick={() => removeItem(prod.id)} > X </button>  
                     
                 </div>
             ) ) }
 
                 <div className="cartTotal">
-                        <h3>Total a pagar: $ { totalCarrito() } </h3>
+                        <h3>Total a pagar: $ { totalQuantity() } </h3>
                 </div>
-            <button onClick={vaciarCarrito}>Vaciar carrito</button>  
+            <button onClick={clearCart}>Vaciar carrito</button>  
 
              <form onSubmit={generarOrden}>
             <input 
