@@ -3,7 +3,6 @@ import Item from "../Item/Item"
 
 const ItemList = ({products}) => {
     
-    console.log('ItemList')
     return (
         <div style={{
             display: "flex",

@@ -1,31 +1,17 @@
-import { useState } from 'react'
+import { useCounter } from "../../hook/useCounter"
 
-const ItemCount = ({stock, initial, onAdd}) => {
-    const [quantity, setQuantity] = useState(initial)
+const ItemCount = ({ inital=1, stock=15, onAdd }) => {
 
-    const increment = () => {
-        if(quantity < stock) {
-            setQuantity(quantity+1)
-        }
-    }
-    const decrement = () => {
-        if(quantity > 1) {
-            setQuantity(quantity-1)
-        }
-    }
+    const { counter, handleSumar, handleRestar } = useCounter(inital, 1, stock)
+
     return (
-        <div className='Counter'>
-            <div className='Controls'>
-                <button className='Button' onClick={decrement}>-</button>
-                <h4 className='Number'>{quantity}</h4>
-                <button className='Button' onClick={increment}>+</button>
-            </div>
-        <div>
-        <button className='Button' onClick={() => onAdd(quantity)} disable={!stock}>
-            Agregar al carrito
-        </button> 
-        </div>
-    </div>
+        <center>
+            <button onClick={handleSumar}> + 1</button> 
+            <label>{counter}</label>
+            <button onClick={handleRestar}> - 1</button> 
+            <button onClick={ ()=>{onAdd(counter)} }>Agregar al carrito</button>
+        </center>
     )
 }
+
 export default ItemCount

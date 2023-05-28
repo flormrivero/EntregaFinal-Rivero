@@ -41,7 +41,7 @@ const ItemListContainer = ({  }) => {
             {isLoading ? 
                     <Loading />
                 :
-                    <ItemList {...products} />
+                    <ItemList products={products} />
             }
         </>
         
