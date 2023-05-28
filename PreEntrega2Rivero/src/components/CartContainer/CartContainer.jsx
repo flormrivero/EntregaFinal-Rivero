@@ -9,7 +9,7 @@ const CartContainer = () =>{
     const [dataForm, setDataForm] = useState({
         name:"",
         phone:"",
-        email:""
+        email:"",
     }) 
     const {cartList, vaciarCarrito, totalCarrito, borrarCantidad, cantidadTotal} = useCartContext()
 

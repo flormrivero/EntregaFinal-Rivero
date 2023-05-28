@@ -1,38 +1,39 @@
 import {useState, useEffect} from 'react'
-
+import ItemList from '../ItemList/ItemList'
 import {useParams} from 'react-router-dom'
 
-import { getDocs, collection, query, where, getFirestore } from 'firebase/firestore'
-import ItemList from '../ItemList/ItemList'
+import { getDocs, collection, query, where } from 'firebase/firestore'
+import { db } from '../../services/firebase/firebaseConfig'
 import { Loading } from "../Loading/Loading"
 
-const ItemListContainer = ({  }) => {
-    const [productos, setProductos] = useState([])
+const ItemListContainer = ({ greeting }) => {
+    const [products, setProducts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     const {categoryId} = useParams()
     
     useEffect(()=>{
-        const db     = getFirestore()
-        const queryCollection = collection(db, '39660')
+        setIsLoading(true)
 
-        if (!categoryId) {  
-            getDocs(queryCollection)
-                .then(res => setProductos(  res.docs.map(producto => ( { id: producto.id, ...producto.data() } )) ))
-                .catch( error => console.log(error) )
-                .finally(()=> setIsLoading(false))
-        }else{
-            const queryCollectionFiltered = query(
-                queryCollection, 
-                where('category','==', categoryId),
-            
-            )
-    
-            getDocs(queryCollectionFiltered)
-                .then(res => setProductos(  res.docs.map(producto => ( { id: producto.id, ...producto.data() } )) ))
-                .catch( error => console.log(error) )
-                .finally(()=> setIsLoading(false))
-        }
+        const collectionRef = categoryId
+        ? query(collection(db, '39660'), where('category', '==', categoryId))
+        : collection(db, '39660')
+
+
+        getDocs(collectionRef)
+                .then(response => {
+                    const productsAddapted = response.docs.map(doc => {
+                        const data = doc.data()
+                        return { id: doc.id, ...data}
+                    })
+                    setProducts(productsAddapted)
+                })
+                .catch( error => {
+                    console.log(error)
+                })
+                .finally(()=> {
+                    setIsLoading(false)
+        })
     }, [categoryId])
 
     return (
@@ -40,7 +41,7 @@ const ItemListContainer = ({  }) => {
             {isLoading ? 
                     <Loading />
                 :
-                    <ItemList productos={productos} />
+                    <ItemList {...products} />
             }
         </>
         

@@ -5,14 +5,16 @@ import {useParams} from 'react-router-dom'
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
 
+import { Loading } from "../Loading/Loading"
+
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
     const { itemId } = useParams ()
 
     useEffect(() => {
-        setLoading(true)
+        setIsLoading(true)
 
         const docRef = doc(db, '39660', itemId)
 
@@ -25,18 +27,19 @@ const ItemDetailContainer = () => {
             .catch(error => {
                 console.log(error)
         })
-        .finally(()=> setLoading(false))
+        .finally(()=> setIsLoading(false))
     }, [itemId])
 
     return (
         <>
-        {loading ?
-        <h2>Cargando...</h2>
-        :
-        <ItemDetail {...product} />
-        }
+            {isLoading ? 
+                    <Loading />
+                :
+                    <ItemDetail {...product} />
+            }
         </>
-    )    
+        
+    ) 
 }
 
 export default ItemDetailContainer
