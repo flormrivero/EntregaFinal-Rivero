@@ -1,7 +1,7 @@
-import { CartContext } from "../Context/CartContext"
+import { useCartContext } from "../Context/CartContext"
 
 const CartContainer = () => {
-    const {cart,  removeCart} = CartContext()
+    const {cart, clearCart} = useCartContext()
 
     return (
         <div>
@@ -12,7 +12,7 @@ const CartContainer = () => {
                     <button > X </button>
                 </div>
             ))}
-            <button onClick={removeCart} className="btn btn-outline-danger">Vaciar Carrito</button>
+            <button onClick={clearCart} className="btn btn-outline-danger">Vaciar Carrito</button>
         </div>
     )
 }

@@ -6,7 +6,7 @@ import CartContainer from '../src/components/CartContainer/CartContainer'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { CartProvider } from '../src/components/Context/CartContext'; 
+import { CartProvider } from './components/Context/CartContext'
 
 function App() {
   return (

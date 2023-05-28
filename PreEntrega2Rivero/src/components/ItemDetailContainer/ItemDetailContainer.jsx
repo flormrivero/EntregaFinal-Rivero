@@ -1,30 +1,23 @@
-import { useState, useEffect } from "react"
-import ItemDetail from '../ItemDetail/ItemDetail'
-import {useParams} from 'react-router-dom'
-import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../../services/firebase/firebaseConfig'
+import ItemDetail from "../ItemDetail/ItemDetail"
+import { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom"
+import { getFirestore, doc, getDoc } from 'firebase/firestore'
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState([])
-    const { itemId } = useParams ();
-    const getItem = async () => {
-        try{
-            const result = await getDoc(doc(db, '39660', itemId))
-            setProduct(result.data())
-        }catch(error){
-            console.log(error);
-        }
-    }
+    const [data, setData] = useState({})
+
+    const { itemId } = useParams()
+
     useEffect(() => {
-        getItem();
-    }, [product]);
+        const querydb = getFirestore()
+        const queryDoc = doc(querydb, '39660', itemId)
+        getDoc(queryDoc)
+            .then(res => setData({ id: res.id, ...res.data() }))
+    }, [itemId])
+
 
     return (
-        <React.Fragment>
-            <ItemDetail item={product} id={itemId}></ItemDetail>
-        </React.Fragment>
-        
-    ) 
+        <ItemDetail data={data} />
+    )
 }
-
 export default ItemDetailContainer

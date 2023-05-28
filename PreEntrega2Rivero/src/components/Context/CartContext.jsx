@@ -1,36 +1,35 @@
-import { createContext, useState } from "react";
+import React, { useState, useContext } from "react"
 
-export const CartContext = createContext({
-    cart: []
-})
+const CartContext = React.createContext([])
 
-export const CartProvider = ({children})=>{
+export const useCartContext = () => useContext(CartContext)
+
+const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
 
-    console.log(cart)
+    const addItem = (item, newQuantity) => {
+        const newCart = cart.filter(prod => prod.id !== item.id)
+        newCart.push({ ...item, quantity: newQuantity })
+        setCart(newCart)
+    }
 
-    const addItem = (item, quantity) => {
-        if(!isInCart(item.id)) {
-            setCart(prev => [...prev, {...item, quantity}])
-        }else {
-            console.error('El producto ya fue agregado')
-        }
+    const totalPrice = () => {
+        return cart.reduce((prev, act) => prev + act.quantity * act.precio, 0)
     }
-    const removeItem = (itemId) => {
-        const cartUpdated = cart.filter(prod => prod.id !== itemId)
-        setCart(cartUpdated)
-    }
-    const clearCart = () => {
-        setCart([])
-    }
-    const isInCart = (itemId) => {
-        return cart.some(prod => prod.id === itemId)
-    }
+
+    const totalProducts = () => cart.reduce((acumulador, productoActual) => acumulador + productoActual.quantity, 0)
+
+    const clear = () => setCart([])
+
+    const isInCart = (id) => cart.find(product => product.id === id) ? true : false
+
+    const removeItem = (id) => setCart(cart.filter(product => product.id !== id))
+
     return (
-        <CartContext.Provider value={{
-            cart, addItem, removeItem, clearCart
-        }}>
+        <CartContext.Provider value={{ clear, isInCart, removeItem, addItem, totalPrice, totalProducts, cart }}>
             {children}
         </CartContext.Provider>
     )
 }
+
+export default CartProvider
