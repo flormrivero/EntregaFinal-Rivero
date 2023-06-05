@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Form from "./Form"
-import { formWhitValidation } from "./formWhitValidation"
+import Form from "../Formulario/Form"
+import { formWhitValidation } from "../Formulario/formWithValidation"
 
 // const FormWhitValidation = form mejorados <- formWhitValidation(Form)
 const FormWhitValidation = formWhitValidation(Form)

@@ -9,12 +9,13 @@ const CartContainer = () => {
             {cart.map(prod => (
                 <div className="w-50">
                     <img className="w-25" src={prod.img} alt="imagen"/>
-                    <label> Precio por unidad: $ {prod.price} - Cantidad : {prod.quantity} - Total: {totalPrice} </label>
+                    <label> Precio por unidad: $ {prod.price} - Cantidad : {prod.quantity} - Total: $ {totalPrice()} </label>
                 </div>
             ))}
-            <button onClick={clear} className="btn btn-outline-danger">Vaciar Carrito</button>
+            <button><Link to='/ckeckout'>Comprar</Link></button>
+            <button onClick={clear} >Vaciar Carrito</button>
             <br></br>
-            <Link to='/'>Volver a comprar</Link>
+            <Link to='/'>Volver a la página principal</Link>
         </div>
     )
 }
