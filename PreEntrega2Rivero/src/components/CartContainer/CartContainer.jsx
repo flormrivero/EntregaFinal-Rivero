@@ -4,7 +4,7 @@ import { useCartContext } from "../Context/CartContext"
 const CartContainer = () => {
     const {cart, clear, totalPrice} = useCartContext()
 
-    if(totalPrice === ''){
+    if(totalPrice.lenght == 0){
         return ('No hay productos en el carrito')
     }
     else{
