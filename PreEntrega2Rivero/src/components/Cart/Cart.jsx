@@ -47,10 +47,11 @@ const Cart = () => {
     }
     return (
         <>
+        <p>Total: $ {totalPrice()}</p>
             {
                 cart.map(product => <ItemCart key={product.id} product={product} />)
             }
-            <p>Total: $ {totalPrice()}</p>
+            
             <form >
                 <div>
                     <label htmlFor="name">Nombre</label>

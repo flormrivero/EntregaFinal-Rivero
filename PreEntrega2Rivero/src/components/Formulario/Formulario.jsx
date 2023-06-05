@@ -35,11 +35,11 @@ const Formulario = () => {
 
       const orden = {
           items: cart.map((producto) => ({
-              id: producto.item.id,
-              nombre: producto.item.nombre,
+              id: producto.id,
+              nombre: producto.nombre,
               cantidad: producto.cantidad,
           })),
-          total: cart.reduce((total, producto) => total + producto.item.precio * producto.cantidad, 0),
+          total: cart.reduce((total, producto) => total + producto.precio * producto.cantidad, 0),
           nombre,
           apellido,
           telefono,
@@ -57,49 +57,48 @@ const Formulario = () => {
               setError("Se produjo un error al crear la orden, vuelva más tarde");
           })
   }
+  
+const {totalPrice} = useCartContext()
 
   return (
       <div>
           <h2>Finalizar compra</h2>
+          <p>Precio $: {totalPrice()} </p>
           <form onSubmit={handleSubmit}>
               {cart.map((producto) => (
-                  <div key={producto.item.id}>
-                      <p>
-                          {producto.item.nombre} x {producto.cantidad}
-                      </p>
-                      <p>Precio $: {producto.item.precio} </p>
-                      <hr />
-                  </div>
+                  <div key={producto.id}>
+                    
+        </div>
               ))
               }
               <hr />
               <div>
-                  <label htmlFor="">Nombre</label>
+                  <label htmlFor="">Nombre:  </label>
                   <input type="text" value={nombre} onChange={(e) => setName(e.target.value)} />
               </div>
               <br></br>
               <div>
-                  <label htmlFor="">Apellido</label>
+                  <label htmlFor="">Apellido:  </label>
                   <input type="text" value={apellido} onChange={(e) => setApellido(e.target.value)} />
               </div>
               <br></br>
               <div>
-                  <label htmlFor="">Telefono</label>
+                  <label htmlFor="">Telefono:  </label>
                   <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
               </div>
               <br></br>
               <div>
-                  <label htmlFor="">Email </label>
+                  <label htmlFor="">Email:  </label>
                   <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
               <br></br>
               <div>
-                  <label htmlFor="">Email Confirmación</label>
+                  <label htmlFor="">Email Confirmación:  </label>
                   <input type="email" value={emailConfirmacion} onChange={(e) => setEmailConfirmacion(e.target.value)} />
               </div>
               {error && <p style={{ color: "red" }}> {error} </p>}
               <br></br>
-              <button type='submit'>Comprar</button>
+              <button type='submit'> Comprar </button>
           </form>
           {
               ordenId && (

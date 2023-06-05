@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
 import { useCartContext } from "../Context/CartContext"
+import '../CartContainer/CartContainer.css'
 
 const CartContainer = () => {
-    const {cart, clear, totalPrice} = useCartContext()
+    const {cart, clear, totalPrice, removeItem} = useCartContext()
 
     if (totalPrice() == 0) {
         return (
@@ -18,16 +19,21 @@ const CartContainer = () => {
 
         <div>
             {cart.map(prod => (
-                <div className="w-50">
-                    <img className="w-25" src={prod.img} alt="imagen"/>
-                    <label> Precio por unidad: $ {prod.price} - Cantidad : {prod.quantity} - Total: $ {totalPrice()} </label>
+                <div>
+                    <img className="img" src={prod.img} alt="imagen"/>
+                    <label> Precio por unidad: $ {prod.price} - Cantidad : {prod.quantity} - Subtotal: $ {prod.price*prod.quantity} </label>
+                    <button onClick={removeItem}> Eliminar item </button>
+                    <br></br>
+                    <br></br>
+                    
                 </div>
-                
+                   
             ))}
+            <div className="bold">Precio Total: $ {totalPrice()}</div> 
             <button><Link to='/Formulario'>Comprar</Link></button>
             <button onClick={clear} >Vaciar Carrito</button>
             <br></br>
-            <Link to='/'>Volver a la página principal</Link>
+            <Link to='/'>Seguir comprando</Link>
         </div>
     
 )}}

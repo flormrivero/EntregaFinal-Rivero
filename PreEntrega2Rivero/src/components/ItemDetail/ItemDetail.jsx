@@ -22,7 +22,11 @@ const ItemDetail = ({ data }) => {
                 goToCart
                     ? <Link to='/cart'>Terminar Compra</Link>
                     : <ItemCount initial={0} stock={10} onAdd={onAdd} />
+                    
             }
+        <br />
+        <br />
+        <Link to='/'>Volver a la página principal</Link>    
         </div>
     )
 }
