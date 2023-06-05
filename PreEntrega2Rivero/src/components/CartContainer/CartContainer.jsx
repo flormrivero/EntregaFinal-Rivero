@@ -4,10 +4,17 @@ import { useCartContext } from "../Context/CartContext"
 const CartContainer = () => {
     const {cart, clear, totalPrice} = useCartContext()
 
-    if(totalPrice.lenght == 0){
-        return ('No hay productos en el carrito')
-    }
-    else{
+    if (totalPrice.length == 0){
+        return (
+            <>    
+                <br></br>
+                <h5>No hay productos en el carrito</h5>
+                <br></br>
+                <Link to='/'>Volver a la página principal</Link>
+            </>
+    )}
+    if (totalPrice.length > 0){
+        return(
 
         <div>
             {cart.map(prod => (
@@ -23,6 +30,6 @@ const CartContainer = () => {
             <Link to='/'>Volver a la página principal</Link>
         </div>
     
-}}
+)}}
 
 export default CartContainer
