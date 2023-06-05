@@ -4,7 +4,7 @@ import { useCartContext } from "../Context/CartContext"
 const CartContainer = () => {
     const {cart, clear, totalPrice} = useCartContext()
 
-    if (totalPrice.length == 0){
+    if (totalPrice() == 0) {
         return (
             <>    
                 <br></br>
@@ -13,7 +13,7 @@ const CartContainer = () => {
                 <Link to='/'>Volver a la página principal</Link>
             </>
     )}
-    if (totalPrice.length > 0){
+    else {
         return(
 
         <div>
