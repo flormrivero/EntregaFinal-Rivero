@@ -31,7 +31,7 @@ const Cart = () => {
             email: form.email,
             phone: form.phone
         },
-        items: cart.map(product => ({ id: product.id, title: product.nombre, price: product.precio, quantity: product.quantity })),
+        items: cart.map(product => ({ id: product.id, title: product.name, price: product.price, quantity: product.quantity })),
         total: totalPrice(),
     }
 
