@@ -22,11 +22,11 @@ const CartContainer = () => {
                 <div>
                     <img className="img" src={prod.img} alt="imagen"/>
                     <label> Precio por unidad: $ {prod.price} - Cantidad : {prod.quantity} - Subtotal: $ {prod.price*prod.quantity} </label>
-                    <button onClick={removeItem}> Eliminar item </button>
+                    <button onClick={()=>removeItem(prod.id)}> Eliminar item </button>
                     <br></br>
                     <br></br>
                     
-                </div>
+        </div>
                    
             ))}
             <div className="bold">Precio Total: $ {totalPrice()}</div> 
