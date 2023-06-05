@@ -1,6 +1,6 @@
 import { useCounter } from "../../hook/useCounter"
 
-const ItemCount = ({ inital=0, stock=15, onAdd }) => {
+const ItemCount = ({ inital=1, stock=15, onAdd }) => {
 
     const { counter, handleSumar, handleRestar } = useCounter(inital, 1, stock)
 

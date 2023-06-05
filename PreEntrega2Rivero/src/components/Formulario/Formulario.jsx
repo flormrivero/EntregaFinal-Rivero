@@ -7,7 +7,7 @@ import { useCartContext } from "../Context/CartContext"
 
 
 const Formulario = () => {
-  const { cart, clearCart } = useCartContext();
+  const { cart, clear } = useCartContext();
   const [name, setName] = useState("");
   const [apellido, setApellido] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -50,7 +50,7 @@ const Formulario = () => {
       addDoc(collection(db, "Formulario"), orden)
           .then((docRef) => {
               setOrdenId(docRef.id);
-              clearCart();
+              clear();
           })
           .catch((error) => {
               console.error("Error al crear la orden", error);
