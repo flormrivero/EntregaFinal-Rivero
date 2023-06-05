@@ -22,6 +22,7 @@ function App() {
             <Route path='/cart' element={< CartContainer />} />
             <Route path='*' element={<h1>404 NOT FOUND</h1>}/>
             <Route path='/checkout' element={<Formulario />}/>
+            <Route path="Formulario" element={<Formulario />} />
           </Routes>
         </CartProvider>
       </BrowserRouter>

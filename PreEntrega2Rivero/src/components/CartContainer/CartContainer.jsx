@@ -12,7 +12,7 @@ const CartContainer = () => {
                     <label> Precio por unidad: $ {prod.price} - Cantidad : {prod.quantity} - Total: $ {totalPrice()} </label>
                 </div>
             ))}
-            <button><Link to='/ckeckout'>Comprar</Link></button>
+            <button><Link to='/Formulario'>Comprar</Link></button>
             <button onClick={clear} >Vaciar Carrito</button>
             <br></br>
             <Link to='/'>Volver a la página principal</Link>
