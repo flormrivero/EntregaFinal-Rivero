@@ -8,7 +8,7 @@ import { useCartContext } from "../Context/CartContext"
 
 const Formulario = () => {
   const { cart, clear } = useCartContext();
-  const [name, setName] = useState("");
+  const [nombre, setName] = useState("");
   const [apellido, setApellido] = useState("");
   const [telefono, setTelefono] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ const Formulario = () => {
       event.preventDefault();
 
       //Validar que los campos esten completos
-      if (!name || !apellido || !telefono || !email || !emailConfirmacion) {
+      if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
           setError("Por favor complete todos los campos");
           return;
       }
@@ -36,11 +36,11 @@ const Formulario = () => {
       const orden = {
           items: cart.map((producto) => ({
               id: producto.item.id,
-              name: producto.item.name,
+              nombre: producto.item.nombre,
               cantidad: producto.cantidad,
           })),
           total: cart.reduce((total, producto) => total + producto.item.precio * producto.cantidad, 0),
-          name,
+          nombre,
           apellido,
           telefono,
           email
@@ -65,7 +65,7 @@ const Formulario = () => {
               {cart.map((producto) => (
                   <div key={producto.item.id}>
                       <p>
-                          {producto.item.name} x {producto.cantidad}
+                          {producto.item.nombre} x {producto.cantidad}
                       </p>
                       <p>Precio $: {producto.item.precio} </p>
                       <hr />
@@ -75,7 +75,7 @@ const Formulario = () => {
               <hr />
               <div>
                   <label htmlFor="">Nombre</label>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                  <input type="text" value={nombre} onChange={(e) => setName(e.target.value)} />
               </div>
               <br></br>
               <div>
