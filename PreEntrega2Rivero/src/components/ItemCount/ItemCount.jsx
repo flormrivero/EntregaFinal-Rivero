@@ -1,4 +1,5 @@
 import { useCounter } from "../../hook/useCounter"
+import { Link } from "react-router-dom"
 
 const ItemCount = ({ inital=1, stock=15, onAdd }) => {
 
@@ -17,7 +18,7 @@ const ItemCount = ({ inital=1, stock=15, onAdd }) => {
 
             <br></br>
         
-            <button onClick={ ()=>{onAdd(counter)} }>Agregar al carrito</button>
+            <button onClick={ ()=>{onAdd(counter)} }><Link to='/Cart'>Agregar al carrito</Link></button>
         </center>
     )
 }
